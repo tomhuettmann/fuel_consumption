@@ -1,12 +1,54 @@
+import json
+import os
+from datetime import datetime
+
 from flask import Flask, render_template
 
 app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+def base():
     # noinspection PyUnresolvedReferences
-    return render_template('index.html')
+    return render_template(
+        'base.html',
+        car_ids=car_ids
+    )
 
 
-app.run(host='0.0.0.0', port=5000)
+@app.route('/car/<car_id>')
+def car(car_id):
+    if car_id in car_ids:
+        fuel_consumptions = add_price_to(add_average_consumption_to(get_chronological_fuel_consumptions_from(car_id)))
+        # noinspection PyUnresolvedReferences
+        return render_template(
+            'car.html',
+            car_id=car_id,
+            fuel_consumptions=fuel_consumptions
+        )
+    else:
+        return "car not found"
+
+
+def get_chronological_fuel_consumptions_from(car_id):
+    file = open('../data/' + car_id + '/fuel_consumptions.json')
+    fuel_consumptions = json.load(file)
+    file.close()
+    return sorted(fuel_consumptions, key=lambda x: datetime.strptime(x['date'], '%d.%m.%Y'), reverse=True)
+
+
+def add_average_consumption_to(fuel_consumptions):
+    for fuel_consumption in fuel_consumptions:
+        fuel_consumption['average'] = round(100 * fuel_consumption['amount'] / fuel_consumption['distance'], 2)
+    return fuel_consumptions
+
+
+def add_price_to(fuel_consumptions):
+    for fuel_consumption in fuel_consumptions:
+        fuel_consumption['price'] = round(fuel_consumption['amount'] * (fuel_consumption['price'] + 0.009), 2)
+    return fuel_consumptions
+
+
+if __name__ == '__main__':
+    car_ids = os.listdir("../data")
+    app.run(host='0.0.0.0', port=5000)

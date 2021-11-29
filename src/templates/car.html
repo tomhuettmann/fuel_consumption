@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../static/bootstrap.css" type="text/css">
-<h1 class="text-center">Kraftstoffverbrauch Mercedes S204</h1>
+<h1 class="text-center">Kraftstoffverbrauch {{ car_id }}</h1>
 <div class="center-block" style="width: 800px;">
     <table class="table table-bordered">
         <tr>
@@ -27,12 +27,14 @@
             <th>Verbrauch</th>
             <th>Preis</th>
         </tr>
+        {% for fuel_consumption in fuel_consumptions %}
         <tr>
-            <td>TODO</td>
-            <td>TODO km</td>
-            <td>TODO Liter</td>
-            <td>TODO l/100km</td>
-            <td title="TODO">TODO €</td>
+            <td>{{ fuel_consumption.date }}</td>
+            <td>{{ fuel_consumption.distance }} km</td>
+            <td>{{ fuel_consumption.amount }} Liter</td>
+            <td>{{ fuel_consumption.average }} l/100km</td>
+            <td title="TODO">{{ fuel_consumption.price }} €</td>
         </tr>
+        {% endfor %}
     </table>
 </div>
