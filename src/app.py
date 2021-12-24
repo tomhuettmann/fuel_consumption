@@ -31,7 +31,7 @@ def car(car_id):
 
 
 def get_chronological_fuel_consumptions_from(car_id):
-    file = open('../data/' + car_id + '/fuel_consumptions.json')
+    file = open('data/' + car_id + '/fuel_consumptions.json')
     fuel_consumptions = json.load(file)
     file.close()
     return sorted(fuel_consumptions, key=lambda x: datetime.strptime(x['date'], '%d.%m.%Y'), reverse=True)
@@ -50,5 +50,5 @@ def add_price_to(fuel_consumptions):
 
 
 if __name__ == '__main__':
-    car_ids = os.listdir("../data")
+    car_ids = os.listdir("data")
     app.run(host='0.0.0.0', port=5000)
