@@ -20,11 +20,14 @@ def base():
 def car(car_id):
     if car_id in car_ids:
         fuel_consumptions = add_price_to(add_average_consumption_to(get_chronological_fuel_consumptions_from(car_id)))
+        total_average_consumption = round(100 * sum(map(lambda x: x['amount'], fuel_consumptions)) / sum(
+            map(lambda x: x['distance'], fuel_consumptions)), 2)
         # noinspection PyUnresolvedReferences
         return render_template(
             'car.html',
             car_id=car_id,
-            fuel_consumptions=fuel_consumptions
+            fuel_consumptions=fuel_consumptions,
+            total_average_consumption=total_average_consumption
         )
     else:
         return "car not found"
