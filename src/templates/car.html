@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="../static/bootstrap.css" type="text/css">
-<h1 class="text-center">Kraftstoffverbrauch {{ car_id }}</h1>
+<h1 class="text-center">Kraftstoffverbrauch {{ car_name }}</h1>
 <div class="center-block" style="width: 800px;">
     <table class="table table-bordered">
         <tr>
@@ -12,7 +12,7 @@
         </tr>
         <tr>
             <td>Insgesamte Laufleistung</td>
-            <td>TODO km</td>
+            <td>{{ overall_distance }} km</td>
         </tr>
         <tr>
             <td>Hochrechnung nächster Monat</td>
