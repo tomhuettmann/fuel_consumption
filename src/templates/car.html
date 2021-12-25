@@ -33,7 +33,7 @@
             <td>{{ fuel_consumption.distance }} km</td>
             <td>{{ fuel_consumption.amount }} Liter</td>
             <td>{{ fuel_consumption.average }} l/100km</td>
-            <td title="TODO">{{ fuel_consumption.price }} €</td>
+            <td title="{{ fuel_consumption.price }}9€ pro Liter">{{ fuel_consumption.total_price }} €</td>
         </tr>
         {% endfor %}
     </table>

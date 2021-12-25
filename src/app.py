@@ -20,7 +20,8 @@ def base():
 def car(car_id):
     if car_id in car_ids:
         car_properties = get_car_properties_from(car_id)
-        fuel_consumptions = add_price_to(add_average_consumption_to(get_chronological_fuel_consumptions_from(car_id)))
+        fuel_consumptions = add_total_price_to(
+            add_average_consumption_to(get_chronological_fuel_consumptions_from(car_id)))
         total_amount = sum(map(lambda x: x['amount'], fuel_consumptions))
         total_distance = sum(map(lambda x: x['distance'], fuel_consumptions))
         total_average_consumption = round(100 * total_amount / total_distance, 2)
@@ -56,9 +57,9 @@ def add_average_consumption_to(fuel_consumptions):
     return fuel_consumptions
 
 
-def add_price_to(fuel_consumptions):
+def add_total_price_to(fuel_consumptions):
     for fuel_consumption in fuel_consumptions:
-        fuel_consumption['price'] = round(fuel_consumption['amount'] * (fuel_consumption['price'] + 0.009), 2)
+        fuel_consumption['total_price'] = round(fuel_consumption['amount'] * (fuel_consumption['price'] + 0.009), 2)
     return fuel_consumptions
 
 
