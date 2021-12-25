@@ -29,6 +29,11 @@ def car(car_id):
                                                                                                      fuel_consumptions)
         distance_per_year = 365 * sum(
             map(lambda x: x['distance'], list(fuel_consumptions_last_year)[:-1])) / last_year_days
+        fuel_consumptions_last_three_months, last_three_months_days = get_all_fuel_consumptions_and_days_within_last(
+            90, fuel_consumptions
+        )
+        costs_per_month = 30 * sum(
+            map(lambda x: x['total_price'], list(fuel_consumptions_last_three_months)[:-1])) / last_three_months_days
         # noinspection PyUnresolvedReferences
         return render_template(
             'car.html',
@@ -36,7 +41,8 @@ def car(car_id):
             fuel_consumptions=fuel_consumptions,
             total_average_consumption=total_average_consumption,
             distance_per_year=get_rounded_thousand_dots_string_from(distance_per_year),
-            overall_distance=get_rounded_thousand_dots_string_from(total_distance + car_properties['base_distance'])
+            overall_distance=get_rounded_thousand_dots_string_from(total_distance + car_properties['base_distance']),
+            costs_per_month=round(costs_per_month, 2)
         )
     else:
         return "car not found"
