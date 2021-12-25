@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from flask import Flask, render_template
 
@@ -12,7 +12,7 @@ def base():
     # noinspection PyUnresolvedReferences
     return render_template(
         'base.html',
-        car_ids=car_ids
+        car_ids=sorted(car_ids)
     )
 
 
@@ -25,13 +25,18 @@ def car(car_id):
         total_amount = sum(map(lambda x: x['amount'], fuel_consumptions))
         total_distance = sum(map(lambda x: x['distance'], fuel_consumptions))
         total_average_consumption = round(100 * total_amount / total_distance, 2)
+        fuel_consumptions_last_year, last_year_days = get_all_fuel_consumptions_and_days_within_last(365,
+                                                                                                     fuel_consumptions)
+        distance_per_year = 365 * sum(
+            map(lambda x: x['distance'], list(fuel_consumptions_last_year)[:-1])) / last_year_days
         # noinspection PyUnresolvedReferences
         return render_template(
             'car.html',
             car_name=car_properties["name"],
             fuel_consumptions=fuel_consumptions,
             total_average_consumption=total_average_consumption,
-            overall_distance=f"{round(total_distance + car_properties['base_distance']):,}".replace(",", ".")
+            distance_per_year=get_rounded_thousand_dots_string_from(distance_per_year),
+            overall_distance=get_rounded_thousand_dots_string_from(total_distance + car_properties['base_distance'])
         )
     else:
         return "car not found"
@@ -61,6 +66,19 @@ def add_total_price_to(fuel_consumptions):
     for fuel_consumption in fuel_consumptions:
         fuel_consumption['total_price'] = round(fuel_consumption['amount'] * (fuel_consumption['price'] + 0.009), 2)
     return fuel_consumptions
+
+
+def get_all_fuel_consumptions_and_days_within_last(days, all_chronological_fuel_consumptions):
+    last_date = datetime.strptime(all_chronological_fuel_consumptions[0]["date"], '%d.%m.%Y')
+    earliest_date = last_date - timedelta(days=days)
+    fuel_consumptions_within_days = list(filter(lambda x: datetime.strptime(x["date"], '%d.%m.%Y') > earliest_date,
+                                                all_chronological_fuel_consumptions))
+    return (fuel_consumptions_within_days, (
+            last_date - datetime.strptime(fuel_consumptions_within_days[-1]["date"], '%d.%m.%Y')).days)
+
+
+def get_rounded_thousand_dots_string_from(number):
+    return f"{round(number):,}".replace(",", ".")
 
 
 if __name__ == '__main__':
