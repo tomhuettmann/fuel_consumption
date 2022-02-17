@@ -1,40 +1,113 @@
-<link rel="stylesheet" href="../static/bootstrap.css" type="text/css">
-<h1 class="text-center">Kraftstoffverbrauch {{ car_name }}</h1>
-<div class="center-block" style="width: 800px;">
-    <table class="table table-bordered">
-        <tr>
-            <td>Durschnittsverbrauch</td>
-            <td><b>&#216;: {{ total_average_consumption }} l/100km</b></td>
-        </tr>
-        <tr>
-            <td>Kilometer im Jahr</td>
-            <td><b>{{ distance_per_year }} km</b></td>
-        </tr>
-        <tr>
-            <td>Insgesamte Laufleistung</td>
-            <td>{{ overall_distance }} km</td>
-        </tr>
-        <tr>
-            <td>Hochrechnung nächster Monat</td>
-            <td>{{ costs_per_month }} €</td>
-        </tr>
-    </table>
-    <table class="table table-bordered table-hover">
-        <tr>
-            <th>Datum</th>
-            <th>Entfernung</th>
-            <th>Menge</th>
-            <th>Verbrauch</th>
-            <th>Preis</th>
-        </tr>
-        {% for fuel_consumption in fuel_consumptions %}
-        <tr>
-            <td>{{ fuel_consumption.date }}</td>
-            <td>{{ fuel_consumption.distance }} km</td>
-            <td>{{ fuel_consumption.amount }} Liter</td>
-            <td>{{ fuel_consumption.average }} l/100km</td>
-            <td title="{{ fuel_consumption.price }}9€ pro Liter">{{ fuel_consumption.total_price }} €</td>
-        </tr>
-        {% endfor %}
-    </table>
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="de">
+<head>
+    <title>1wp.de</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="../static/assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="../static/assets/css/noscript.css"/>
+    </noscript>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="/" class="logo">1wp.de</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="nav">
+        <ul class="links">
+            <li><a href="/">Home</a></li>
+            {% for car_id in car_ids %}
+            {% if car_id == current_car_id %}
+            <li class="active"><!--suppress HtmlUnknownTarget -->
+                <a href="/car/{{ car_id }}">{{ car_id }}</a></li>
+            {% else %}
+            <li><!--suppress HtmlUnknownTarget -->
+                <a href="/car/{{ car_id }}">{{ car_id }}</a></li>
+            {% endif %}
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+        <h3 class="align-center">Kraftstoffverbrauch {{ car_name }}</h3>
+
+        <div class="table-wrapper">
+            <table class="alt">
+                <tr>
+                    <td>Durschnittsverbrauch</td>
+                    <td><b>&#216;: {{ total_average_consumption }} l/100km</b></td>
+                </tr>
+                <tr>
+                    <td>Kilometer im Jahr</td>
+                    <td><b>{{ distance_per_year }} km</b></td>
+                </tr>
+                <tr>
+                    <td>Insgesamte Laufleistung</td>
+                    <td>{{ overall_distance }} km</td>
+                </tr>
+                <tr>
+                    <td>Hochrechnung nächster Monat</td>
+                    <td>{{ costs_per_month }} €</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                <tr>
+                    <th>Datum</th>
+                    <th>Entfernung</th>
+                    <th>Menge</th>
+                    <th>Verbrauch</th>
+                    <th>Preis</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fuel_consumption in fuel_consumptions %}
+                <tr>
+                    <td>{{ fuel_consumption.date }}</td>
+                    <td>{{ fuel_consumption.distance }} km</td>
+                    <td>{{ fuel_consumption.amount }} Liter</td>
+                    <td>{{ fuel_consumption.average }} l/100km</td>
+                    <td title="{{ fuel_consumption.price }}9€ pro Liter">{{ fuel_consumption.total_price }} €</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <ul>
+            <li>&copy; 1wp.de</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+
 </div>
+
+<!-- Scripts -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/jquery.scrollex.min.js"></script>
+<script src="../static/assets/js/jquery.scrolly.min.js"></script>
+<script src="../static/assets/js/browser.min.js"></script>
+<script src="../static/assets/js/breakpoints.min.js"></script>
+<script src="../static/assets/js/util.js"></script>
+<script src="../static/assets/js/main.js"></script>
+
+</body>
+</html>

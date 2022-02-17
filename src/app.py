@@ -11,7 +11,7 @@ app = Flask(__name__)
 def base():
     # noinspection PyUnresolvedReferences
     return render_template(
-        'base.html',
+        'index.html',
         car_ids=sorted(car_ids)
     )
 
@@ -38,11 +38,13 @@ def car(car_id):
         return render_template(
             'car.html',
             car_name=car_properties["name"],
-            fuel_consumptions=fuel_consumptions,
+            fuel_consumptions=get_two_digits_formatted_fuel_consumptions(fuel_consumptions),
             total_average_consumption=total_average_consumption,
             distance_per_year=get_rounded_thousand_dots_string_from(distance_per_year),
             overall_distance=get_rounded_thousand_dots_string_from(total_distance + car_properties['base_distance']),
-            costs_per_month=round(costs_per_month, 2)
+            costs_per_month=round(costs_per_month, 2),
+            car_ids=sorted(car_ids),
+            current_car_id=car_id
         )
     else:
         return "car not found"
@@ -85,6 +87,14 @@ def get_all_fuel_consumptions_and_days_within_last(days, all_chronological_fuel_
 
 def get_rounded_thousand_dots_string_from(number):
     return f"{round(number):,}".replace(",", ".")
+
+
+def get_two_digits_formatted_fuel_consumptions(fuel_consumptions):
+    for fuel_consumption in fuel_consumptions:
+        fuel_consumption['amount'] = "{:.2f}".format(fuel_consumption['amount'])
+        fuel_consumption['average'] = "{:.2f}".format(fuel_consumption['average'])
+        fuel_consumption['total_price'] = "{:.2f}".format(fuel_consumption['total_price'])
+    return fuel_consumptions
 
 
 if __name__ == '__main__':

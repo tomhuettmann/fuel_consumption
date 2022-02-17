@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<!--
+	Massively by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="de">
+<head>
+    <title>1wp.de</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+    <link rel="stylesheet" href="../static/assets/css/main.css"/>
+    <noscript>
+        <link rel="stylesheet" href="../static/assets/css/noscript.css"/>
+    </noscript>
+</head>
+<body class="is-preload">
+
+<!-- Wrapper -->
+<div id="wrapper" class="fade-in">
+
+    <!-- Header -->
+    <header id="header">
+        <a href="/" class="logo">1wp.de</a>
+    </header>
+
+    <!-- Nav -->
+    <nav id="nav">
+        <ul class="links">
+            <li class="active"><a href="/">Home</a></li>
+            {% for car_id in car_ids %}
+            <li><!--suppress HtmlUnknownTarget -->
+                <a href="/car/{{ car_id }}">{{ car_id }}</a></li>
+            {% endfor %}
+        </ul>
+    </nav>
+
+    <!-- Main -->
+    <div id="main">
+        <section class="posts">
+            {% for car_id in car_ids %}
+            <article>
+                <header>
+                    <h2><!--suppress HtmlUnknownTarget -->
+                        <a href="/car/{{ car_id }}">{{ car_id }}</a></h2>
+                </header>
+                <!--suppress HtmlUnknownTarget -->
+                <a href="/car/{{ car_id }}" class="image fit"><img src="../static/images/pic01.jpg" alt=""/></a>
+            </article>
+            {% endfor %}
+        </section>
+    </div>
+
+    <!-- Copyright -->
+    <div id="copyright">
+        <ul>
+            <li>&copy; 1wp.de</li>
+            <li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="../static/assets/js/jquery.min.js"></script>
+<script src="../static/assets/js/jquery.scrollex.min.js"></script>
+<script src="../static/assets/js/jquery.scrolly.min.js"></script>
+<script src="../static/assets/js/browser.min.js"></script>
+<script src="../static/assets/js/breakpoints.min.js"></script>
+<script src="../static/assets/js/util.js"></script>
+<script src="../static/assets/js/main.js"></script>
+
+</body>
+</html>
