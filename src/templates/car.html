@@ -66,7 +66,7 @@
         </div>
 
         <div class="table-wrapper">
-            <table>
+            <table id="data">
                 <thead>
                 <tr>
                     <th>Datum</th>
@@ -86,8 +86,13 @@
                     <td title="{{ fuel_consumption.price }}9€ pro Liter">{{ fuel_consumption.total_price }} €</td>
                 </tr>
                 {% endfor %}
+                </tbody>
             </table>
         </div>
+
+        <footer>
+            <div class="pagination" id="pagination"><a class="previous" style="opacity: 0">Zurück</a></div>
+        </footer>
     </div>
 
     <!-- Copyright -->

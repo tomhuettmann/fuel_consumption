@@ -3025,6 +3025,10 @@ table td {
     padding: 0.25rem 0.25rem;
 }
 
+table td:empty::after{
+    content: "\00a0";
+}
+
 table th {
     font-family: "Source Sans Pro", Helvetica, sans-serif;
     font-size: 1rem;
@@ -3042,12 +3046,7 @@ table th {
 }
 
 @media screen and (max-width: 736px) {
-    table th {
-        font-size: 0.8rem;
-        padding: 0;
-    }
-
-    table td {
+    table th, table td {
         font-size: 0.8rem;
         padding: 0;
     }
@@ -3117,7 +3116,7 @@ table.alt tbody tr td {
     display: -moz-inline-flex;
     display: -webkit-inline-flex;
     display: -ms-inline-flex;
-    display: inline-flex;
+    display: initial;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
@@ -3133,7 +3132,6 @@ table.alt tbody tr td {
     -webkit-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
     -ms-transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
     transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out, color 0.2s ease-in-out;
-    border: solid 2px;
     display: inline-block;
     font-family: "Source Sans Pro", Helvetica, sans-serif;
     font-size: 0.8rem;
@@ -3147,6 +3145,7 @@ table.alt tbody tr td {
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
+    border-bottom: none;
 }
 
 .pagination .next, .pagination .previous {
