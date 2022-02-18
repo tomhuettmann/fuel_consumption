@@ -3265,20 +3265,16 @@ table.alt tbody tr td {
 
 #wrapper.fade-in:before {
     pointer-events: none;
-    -moz-transition: opacity 1s ease-in-out;
-    -webkit-transition: opacity 1s ease-in-out;
-    -ms-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
-    -moz-transition-delay: 0.75s;
-    -webkit-transition-delay: 0.75s;
-    -ms-transition-delay: 0.75s;
-    transition-delay: 0.75s;
+    -moz-transition: opacity 2.5s ease-in-out;
+    -webkit-transition: opacity 2.5s ease-in-out;
+    -ms-transition: opacity 2.5s ease-in-out;
+    transition: opacity 2.5s ease-in-out;
     background: #1e252d;
     content: '';
     display: block;
     height: 100%;
     left: 0;
-    opacity: 0;
+    opacity: 0.5;
     position: fixed;
     top: 0;
     width: 100%;
