@@ -21,6 +21,9 @@ $(document).ready(function () {
     $('#data tbody tr').slice(0, rowsShown).show();
     $('#pagination a.page:first').addClass('active');
     $('#pagination a.page').bind('click', function () {
+        if ($(this)[0].classList.contains('active')) {
+            return;
+        }
         currPageNumber = parseInt(this.textContent);
         $('#pagination a').removeClass('active');
         $(this).addClass('active');
