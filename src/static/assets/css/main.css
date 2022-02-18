@@ -2630,6 +2630,10 @@ input[type="radio"]:focus + label:before {
     margin-top: 0;
 }
 
+.black-background {
+    background-color: black;
+}
+
 .image.fit img {
     width: 100%;
 }

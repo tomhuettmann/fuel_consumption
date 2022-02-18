@@ -45,7 +45,8 @@
                         <a href="/car/{{ car_id }}">{{ car_id }}</a></h2>
                 </header>
                 <!--suppress HtmlUnknownTarget -->
-                <a href="/car/{{ car_id }}" class="image fit"><img src="../static/images/pic01.jpg" alt=""/></a>
+                <a href="/car/{{ car_id }}" class="image fit black-background"><!--suppress HtmlUnknownTarget -->
+                    <img src="../static/images/{{ car_id }}.png" alt=""/></a>
             </article>
             {% endfor %}
         </section>
