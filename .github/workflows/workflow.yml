@@ -18,4 +18,4 @@ jobs:
             cd src
             docker build -t fuel_consumption .
             docker stop fuel_consumption && docker rm fuel_consumption
-            docker run --name fuel_consumption -d -p 127.0.0.1:5001:5000 fuel_consumption
+            docker run --name fuel_consumption --always -d -p 127.0.0.1:5001:5000 fuel_consumption
