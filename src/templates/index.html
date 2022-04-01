@@ -50,6 +50,12 @@
             </article>
             {% endfor %}
         </section>
+        <article class="post featured">
+            <header>
+                <h2>Preisentwicklung</h2>
+                <canvas id="myChart" width="400" height="400"></canvas>
+            </header>
+        </article>
     </div>
 
     <!-- Copyright -->
@@ -70,6 +76,12 @@
 <script src="static/assets/js/breakpoints.min.js"></script>
 <script src="static/assets/js/util.js"></script>
 <script src="static/assets/js/main.js"></script>
+
+<!-- Price Trend Chart -->
+<input type="hidden"  id="labels" value="{{ labels }}">
+<input type="hidden"  id="data" value="{{ data }}">
+<script src="static/assets/js/chart/chart.js"></script>
+<script src="static/assets/js/chart/myChart.js"></script>
 
 </body>
 </html>

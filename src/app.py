@@ -13,10 +13,24 @@ car_template = env.get_template('car.html')
 
 def generate_index():
     filename = os.path.join(root, '../docs', 'index.html')
+    chart_data = get_chart_data(car_ids)
     with open(filename, 'w') as fh:
         fh.write(index_template.render(
-            car_ids=sorted(car_ids)
+            car_ids=sorted(car_ids),
+            labels=list(map(lambda e: e.strftime("%d.%m.%Y"), chart_data.keys())),
+            data=list(chart_data.values())
         ))
+
+
+def get_chart_data(cars):
+    data = []
+    for car_id in cars:
+        data.append(get_chronological_fuel_consumptions_from(car_id))
+    all_car_data = {}
+    for car_data in data:
+        all_car_data.update(
+            dict(map(lambda cd: (datetime.strptime(cd.get("date"), '%d.%m.%Y'), cd.get("price")), car_data)))
+    return dict(sorted(all_car_data.items()))
 
 
 def generate_car(car_id):
