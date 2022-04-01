@@ -18,7 +18,7 @@ jobs:
       - name: Cleanup
         run: |
           rm -rf docs/*.html
-          git add docs/*
+          git add docs
           git commit -m "cleanup files for pages"
           git push
 
@@ -28,6 +28,6 @@ jobs:
           pip install -r requirements.txt
           python app.py
           cd ..
-          git add docs/*
+          git add docs
           git commit -m "generate files for pages"
           git push
