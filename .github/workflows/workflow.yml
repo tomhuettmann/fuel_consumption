@@ -8,25 +8,26 @@ jobs:
     name: Deployment
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Cleanup
-      run: |
-        rm -rf docs/*
-    - name: Generate files
-      run: |
-        cd src
-        pip install -r requirements.txt
-        python app.py
-        cd ..
-    - name: Setup git config
-      run: |
-        git config --global user.name "GitHub Actions Bot"
-        git config --global user.email "<>"
-    - name: Commit changes
-      run: |
-        git status
-        git add docs/*
-        git commit -m "generate files for pages"
-    - name: Push changes
-      run: |
-        git push
+      - uses: actions/checkout@v2
+
+      - name: Setup
+        run: |
+          git config --global user.name "GitHub Actions Bot"
+          git config --global user.email "<>"
+
+      - name: Cleanup
+        run: |
+          rm -rf docs/*.html
+          git add docs/*
+          git commit -m "cleanup files for pages"
+          git push
+
+      - name: Generation
+        run: |
+          cd src
+          pip install -r requirements.txt
+          python app.py
+          cd ..
+          git add docs/*
+          git commit -m "generate files for pages"
+          git push
