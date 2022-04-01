@@ -17,5 +17,14 @@ const myChart = new Chart(ctx, {
                 display: false,
             }
         },
+        scales: {
+            y: {
+                ticks: {
+                    callback: function(value) {
+                        return value + "€";
+                    }
+                }
+            }
+        }
     },
 });
