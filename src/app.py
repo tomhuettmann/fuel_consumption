@@ -36,7 +36,7 @@ def generate_car(car_id):
     costs_per_month = 30 * sum(
         map(lambda x: x['total_price'], list(fuel_consumptions_last_three_months)[:-1])) / last_three_months_days
 
-    filename = os.path.join(root, '../docs', 'car_' + car_id + '.html')
+    filename = os.path.join(root, '../docs', car_id + '.html')
     with open(filename, 'w') as fh:
         fh.write(car_template.render(
             car_name=car_properties["name"],

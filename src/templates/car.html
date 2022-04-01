@@ -31,10 +31,10 @@
             {% for car_id in car_ids %}
             {% if car_id == current_car_id %}
             <li class="active"><!--suppress HtmlUnknownTarget -->
-                <a href="car_{{ car_id }}.html">{{ car_id }}</a></li>
+                <a href="{{ car_id }}.html">{{ car_id }}</a></li>
             {% else %}
             <li><!--suppress HtmlUnknownTarget -->
-                <a href="car_{{ car_id }}.html">{{ car_id }}</a></li>
+                <a href="{{ car_id }}.html">{{ car_id }}</a></li>
             {% endif %}
             {% endfor %}
         </ul>

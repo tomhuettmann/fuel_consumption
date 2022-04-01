@@ -30,7 +30,7 @@
             <li class="active"><a href="index.html">Home</a></li>
             {% for car_id in car_ids %}
             <li><!--suppress HtmlUnknownTarget -->
-                <a href="car_{{ car_id }}.html">{{ car_id }}</a></li>
+                <a href="{{ car_id }}.html">{{ car_id }}</a></li>
             {% endfor %}
         </ul>
     </nav>
@@ -42,10 +42,10 @@
             <article>
                 <header>
                     <h2><!--suppress HtmlUnknownTarget -->
-                        <a href="car_{{ car_id }}.html">{{ car_id }}</a></h2>
+                        <a href="{{ car_id }}.html">{{ car_id }}</a></h2>
                 </header>
                 <!--suppress HtmlUnknownTarget -->
-                <a href="car_{{ car_id }}.html" class="image fit black-background"><!--suppress HtmlUnknownTarget -->
+                <a href="{{ car_id }}.html" class="image fit black-background"><!--suppress HtmlUnknownTarget -->
                     <img src="static/images/{{ car_id }}.png" alt=""/></a>
             </article>
             {% endfor %}
