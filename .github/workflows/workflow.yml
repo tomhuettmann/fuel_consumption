@@ -5,10 +5,13 @@ on:
       - 'docs/**'
 jobs:
   build:
-    name: Build
+    name: Deployment
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
+    - name: Cleanup
+      run: |
+        rm -rf docs/*
     - name: Generate files
       run: |
         cd src
