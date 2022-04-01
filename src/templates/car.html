@@ -9,9 +9,9 @@
     <title>1wp.de</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <link rel="stylesheet" href="../static/assets/css/main.css"/>
+    <link rel="stylesheet" href="static/assets/css/main.css"/>
     <noscript>
-        <link rel="stylesheet" href="../static/assets/css/noscript.css"/>
+        <link rel="stylesheet" href="static/assets/css/noscript.css"/>
     </noscript>
 </head>
 <body class="is-preload">
@@ -21,20 +21,20 @@
 
     <!-- Header -->
     <header id="header">
-        <a href="/" class="logo">1wp.de</a>
+        <a href="index.html" class="logo">1wp.de</a>
     </header>
 
     <!-- Nav -->
     <nav id="nav">
         <ul class="links">
-            <li><a href="/">Home</a></li>
+            <li><a href="index.html">Home</a></li>
             {% for car_id in car_ids %}
             {% if car_id == current_car_id %}
             <li class="active"><!--suppress HtmlUnknownTarget -->
-                <a href="/car/{{ car_id }}">{{ car_id }}</a></li>
+                <a href="car_{{ car_id }}.html">{{ car_id }}</a></li>
             {% else %}
             <li><!--suppress HtmlUnknownTarget -->
-                <a href="/car/{{ car_id }}">{{ car_id }}</a></li>
+                <a href="car_{{ car_id }}.html">{{ car_id }}</a></li>
             {% endif %}
             {% endfor %}
         </ul>
@@ -106,13 +106,13 @@
 </div>
 
 <!-- Scripts -->
-<script src="../static/assets/js/jquery.min.js"></script>
-<script src="../static/assets/js/jquery.scrollex.min.js"></script>
-<script src="../static/assets/js/jquery.scrolly.min.js"></script>
-<script src="../static/assets/js/browser.min.js"></script>
-<script src="../static/assets/js/breakpoints.min.js"></script>
-<script src="../static/assets/js/util.js"></script>
-<script src="../static/assets/js/main.js"></script>
+<script src="static/assets/js/jquery.min.js"></script>
+<script src="static/assets/js/jquery.scrollex.min.js"></script>
+<script src="static/assets/js/jquery.scrolly.min.js"></script>
+<script src="static/assets/js/browser.min.js"></script>
+<script src="static/assets/js/breakpoints.min.js"></script>
+<script src="static/assets/js/util.js"></script>
+<script src="static/assets/js/main.js"></script>
 
 </body>
 </html>
