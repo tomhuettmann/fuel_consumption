@@ -21,6 +21,7 @@ jobs:
         git config --global user.email "<>"
     - name: Commit changes
       run: |
+        git status
         git add docs/*
         git commit -m "generate files for pages"
     - name: Push changes
