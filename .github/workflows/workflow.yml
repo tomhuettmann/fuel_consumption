@@ -1,4 +1,4 @@
-name: remote ssh command
+name: Pages Deployment
 on:
   push:
     paths-ignore:
