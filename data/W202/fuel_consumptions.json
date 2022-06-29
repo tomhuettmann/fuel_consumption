@@ -1,5 +1,17 @@
 [
   {
+    "date": "28.06.2022",
+    "distance": 501.5,
+    "amount": 37.59,
+    "price": 1.87
+  },
+  {
+    "date": "20.06.2022",
+    "distance": 451.8,
+    "amount": 33.2,
+    "price": 1.91
+  },
+  {
     "date": "07.06.2022",
     "distance": 508.3,
     "amount": 40.61,
