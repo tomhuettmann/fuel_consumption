@@ -2,6 +2,7 @@ import json
 import os
 from datetime import datetime, timedelta
 from distutils.dir_util import copy_tree
+from shutil import rmtree
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -15,11 +16,8 @@ car_template = env.get_template('car.html')
 def create_empty_output_folder():
     output_path = f"{root_dir}/../out"
     if os.path.exists(output_path):
-        output_path_content = [f for f in os.listdir(output_path)]
-        for content in output_path_content:
-            os.remove(os.path.join(output_path, content))
-    else:
-        os.makedirs(output_path)
+        rmtree(output_path)
+    os.makedirs(output_path)
 
 
 def copy_static_files():
