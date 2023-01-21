@@ -1,25 +1,42 @@
 import json
 import os
 from datetime import datetime, timedelta
+from distutils.dir_util import copy_tree
 
 from jinja2 import Environment, FileSystemLoader
 
-root = os.path.dirname(os.path.abspath(__file__))
-templates_dir = os.path.join(root, 'templates')
+root_dir = os.path.dirname(os.path.abspath(__file__))
+templates_dir = os.path.join(root_dir, 'templates')
 env = Environment(loader=FileSystemLoader(templates_dir))
 index_template = env.get_template('index.html')
 car_template = env.get_template('car.html')
 
 
+def create_empty_output_folder():
+    output_path = f"{root_dir}/../out"
+    if os.path.exists(output_path):
+        output_path_content = [f for f in os.listdir(output_path)]
+        for content in output_path_content:
+            os.remove(os.path.join(output_path, content))
+    else:
+        os.makedirs(output_path)
+
+
+def copy_static_files():
+    from_directory = f"{root_dir}/static"
+    to_directory = f"{root_dir}/../out/static"
+    copy_tree(from_directory, to_directory)
+
+
 def generate_index():
-    filename = os.path.join(root, '../docs', 'index.html')
+    filename = os.path.join(root_dir, "../out", "index.html")
     chart_data = get_chart_data(car_ids)
-    with open(filename, 'w') as fh:
-        fh.write(index_template.render(
-            car_ids=sorted(car_ids),
-            labels=list(map(lambda e: e.strftime("%d.%m.%Y"), chart_data.keys())),
-            data=list(chart_data.values())
-        ))
+    file = open(filename, "w")
+    file.write(index_template.render(
+        car_ids=sorted(car_ids),
+        labels=list(map(lambda e: e.strftime("%d.%m.%Y"), chart_data.keys())),
+        data=list(chart_data.values())
+    ))
 
 
 def get_chart_data(cars):
@@ -50,18 +67,18 @@ def generate_car(car_id):
     costs_per_month = 30 * sum(
         map(lambda x: x['total_price'], list(fuel_consumptions_last_three_months)[:-1])) / last_three_months_days
 
-    filename = os.path.join(root, '../docs', car_id + '.html')
-    with open(filename, 'w') as fh:
-        fh.write(car_template.render(
-            car_name=car_properties["name"],
-            fuel_consumptions=get_two_digits_formatted_fuel_consumptions(fuel_consumptions),
-            total_average_consumption=total_average_consumption,
-            distance_per_year=get_rounded_thousand_dots_string_from(distance_per_year),
-            overall_distance=get_rounded_thousand_dots_string_from(total_distance + car_properties['base_distance']),
-            costs_per_month=round(costs_per_month, 2),
-            car_ids=sorted(car_ids),
-            current_car_id=car_id
-        ))
+    filename = os.path.join(root_dir, "../out", f"{car_id}.html")
+    file = open(filename, "w")
+    file.write(car_template.render(
+        car_name=car_properties["name"],
+        fuel_consumptions=get_two_digits_formatted_fuel_consumptions(fuel_consumptions),
+        total_average_consumption=total_average_consumption,
+        distance_per_year=get_rounded_thousand_dots_string_from(distance_per_year),
+        overall_distance=get_rounded_thousand_dots_string_from(total_distance + car_properties['base_distance']),
+        costs_per_month=round(costs_per_month, 2),
+        car_ids=sorted(car_ids),
+        current_car_id=car_id
+    ))
 
 
 def get_chronological_fuel_consumptions_from(car_id):
@@ -113,6 +130,8 @@ def get_two_digits_formatted_fuel_consumptions(fuel_consumptions):
 
 if __name__ == '__main__':
     print("Start generating the files for pages")
+    create_empty_output_folder()
+    copy_static_files()
     car_ids = os.listdir("../data")
     generate_index()
     for car in car_ids:

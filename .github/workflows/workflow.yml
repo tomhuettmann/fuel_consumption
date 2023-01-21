@@ -1,35 +1,48 @@
 name: Pages Deployment
 on:
   push:
-    paths-ignore:
-      - 'docs/**'
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
 jobs:
   build:
-    name: Deployment
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Setup
-        run: |
-          git config --global user.name "GitHub Actions Bot"
-          git config --global user.email "<>"
-
-      - name: Cleanup
-        run: |
-          rm -rf docs/*.html
-          git add docs
-          git commit -m "cleanup files for pages"
-
-      - name: Generation
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Pages
+        uses: actions/configure-pages@v2
+      - name: Build Output
         run: |
           cd src
           pip install -r requirements.txt
           python app.py
-          cd ..
-          git add docs
-          git commit -m "generate files for pages"
+      - name: Build with Jekyll
+        uses: actions/jekyll-build-pages@v1
+        with:
+          source: ./out
+          destination: ./_site
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v1
 
-      - name: Deploy
-        run: |
-          git push
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
