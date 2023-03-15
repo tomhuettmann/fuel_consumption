@@ -1,5 +1,23 @@
 [
   {
+    "date": "06.03.2023",
+    "distance": 464.8,
+    "amount": 38.29,
+    "price": 1.80
+  },
+  {
+    "date": "24.02.2023",
+    "distance": 352.0,
+    "amount": 27.80,
+    "price": 1.78
+  },
+  {
+    "date": "20.02.2023",
+    "distance": 412.0,
+    "amount": 32.47,
+    "price": 1.76
+  },
+  {
     "date": "13.02.2023",
     "distance": 409.8,
     "amount": 35.92,
