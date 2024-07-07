@@ -1,5 +1,29 @@
 [
   {
+    "date": "04.07.2024",
+    "distance": 499.3,
+    "amount": 41.75,
+    "price": 1.80
+  },
+  {
+    "date": "10.06.2024",
+    "distance": 441.0,
+    "amount": 37.45,
+    "price": 1.79
+  },
+  {
+    "date": "01.06.2024",
+    "distance": 461.6,
+    "amount": 38.64,
+    "price": 1.86
+  },
+  {
+    "date": "26.05.2024",
+    "distance": 488.3,
+    "amount": 41.50,
+    "price": 1.91
+  },
+  {
     "date": "18.05.2024",
     "distance": 503,
     "amount": 41.71,
