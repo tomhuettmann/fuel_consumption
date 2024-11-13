@@ -1,5 +1,23 @@
 [
   {
+    "date": "11.11.2024",
+    "distance": 358.6,
+    "amount": 32.90,
+    "price": 1.66
+  },
+  {
+    "date": "05.11.2024",
+    "distance": 337.5,
+    "amount": 24.45,
+    "price": 1.69
+  },
+  {
+    "date": "29.10.2024",
+    "distance": 354.9,
+    "amount": 29.24,
+    "price": 1.71
+  },
+  {
     "date": "23.10.2024",
     "distance": 413,
     "amount": 34.04,
