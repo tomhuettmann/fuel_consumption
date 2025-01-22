@@ -3,4 +3,16 @@ updates:
   - package-ecosystem: "pip"
     directory: "src"
     schedule:
-      interval: "weekly"
+      interval: "daily"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    groups:
+      dependencies:
+        patterns:
+          - "*"
