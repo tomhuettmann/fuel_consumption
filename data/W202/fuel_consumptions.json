@@ -1,5 +1,17 @@
 [
   {
+    "date": "20.01.2025",
+    "distance": 471.3,
+    "amount": 43.2,
+    "price": 1.75
+  },
+  {
+    "date": "08.01.2025",
+    "distance": 454.5,
+    "amount": 40.59,
+    "price": 1.77
+  },
+  {
     "date": "23.12.2024",
     "distance": 488.4,
     "amount": 41.84,
