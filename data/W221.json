@@ -1,0 +1,32 @@
+[
+    {
+        "date": "20.01.2025",
+        "distance": 61651,
+        "amount": 79.26,
+        "price": 1.809
+    },
+    {
+        "date": "29.12.2024",
+        "distance": 61028,
+        "amount": 77.48,
+        "price": 1.729
+    },
+    {
+        "date": "09.12.2024",
+        "distance": 60432,
+        "amount": 64.28,
+        "price": 1.649
+    },
+    {
+        "date": "08.12.2024",
+        "distance": 59835,
+        "amount": 77.48,
+        "price": 1.729
+    },
+    {
+        "date": "01.01.1970",
+        "distance": 59193,
+        "amount": 0,
+        "price": 0
+    }
+]
