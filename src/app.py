@@ -113,7 +113,7 @@ def generate_car_endpoint(endpoint_name):
                 }
             )
 
-        data = {"properties": properties, "entries": entries}
+        data = {"properties": properties, "entries": list(reversed(entries))}
         with open(f"{out_dir}/{endpoint_name}", "w") as file:
             file.write(json.dumps(data, indent=4))
 
