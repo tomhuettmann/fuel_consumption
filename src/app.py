@@ -3,13 +3,11 @@ import os
 from datetime import datetime, timedelta
 from shutil import rmtree
 
-from jinja2 import Template
-
 script_dir = os.path.dirname(os.path.abspath(__file__))
 
-template_dir = f"{script_dir}/templates"
 data_dir = f"{script_dir}/../data"
 out_dir = f"{script_dir}/../out"
+root_endpoint_name = "index.json"
 price_overview_endpoint_name = "price_overview.json"
 
 
@@ -20,10 +18,19 @@ def create_empty_output_folder():
 
 
 def generate_index_endpoint(endpoints):
-    with open(f"{template_dir}/index.html") as index_file:
-        index_template = Template(index_file.read())
-        with open(f"{out_dir}/index.html", "w") as file:
-            file.write(index_template.render(endpoints=endpoints))
+    data = {
+        "cars": [
+            {"name": f"{endpoint.replace('.json', '')}", "path": f"/{endpoint}"}
+            for endpoint in endpoints
+        ],
+        "other": {
+            "price_overview_path": f"/{price_overview_endpoint_name}",
+            "repo": "https://github.com/tomhuettmann/fuel_consumption",
+        },
+    }
+
+    with open(f"{out_dir}/{root_endpoint_name}", "w") as file:
+        file.write(json.dumps(data, indent=4))
 
 
 def get_average_consumption(sorted_properties):
@@ -142,7 +149,7 @@ if __name__ == "__main__":
     create_empty_output_folder()
 
     car_endpoints = sorted([e.name for e in os.scandir(data_dir) if e.is_file()])
-    generate_index_endpoint(car_endpoints + [price_overview_endpoint_name])
+    generate_index_endpoint(car_endpoints)
     for car_endpoint in car_endpoints:
         generate_car_endpoint(car_endpoint)
     generate_price_overview_endpoint(car_endpoints)
