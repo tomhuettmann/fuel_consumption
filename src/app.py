@@ -7,6 +7,7 @@ script_dir = os.path.dirname(os.path.abspath(__file__))
 
 data_dir = f"{script_dir}/../data"
 out_dir = f"{script_dir}/../out"
+domain = "hampfhof.de"
 root_endpoint_name = "index.json"
 price_overview_endpoint_name = "price_overview.json"
 
@@ -20,11 +21,14 @@ def create_empty_output_folder():
 def generate_index_endpoint(endpoints):
     data = {
         "cars": [
-            {"name": f"{endpoint.replace('.json', '')}", "path": f"/{endpoint}"}
+            {
+                "name": f"{endpoint.replace('.json', '')}",
+                "path": f"https://{domain}/{endpoint}",
+            }
             for endpoint in endpoints
         ],
         "other": {
-            "price_overview_path": f"/{price_overview_endpoint_name}",
+            "price_overview_path": f"https://{domain}/{price_overview_endpoint_name}",
             "repo": "https://github.com/tomhuettmann/fuel_consumption",
         },
     }
