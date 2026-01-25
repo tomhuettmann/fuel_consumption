@@ -26,11 +26,7 @@ def generate_index_endpoint(endpoints):
                 "path": f"https://{domain}/{endpoint}",
             }
             for endpoint in endpoints
-        ],
-        "other": {
-            "price_overview_path": f"https://{domain}/{price_overview_endpoint_name}",
-            "repo": "https://github.com/tomhuettmann/fuel_consumption",
-        },
+        ]
     }
 
     with open(f"{out_dir}/{root_endpoint_name}", "w") as file:
@@ -129,24 +125,6 @@ def generate_car_endpoint(endpoint_name):
             file.write(json.dumps(data, indent=4))
 
 
-def generate_price_overview_endpoint(car_endpoints):
-    all_entries = []
-    for car_endpoint in car_endpoints:
-        with open(f"{data_dir}/{car_endpoint}") as properties_file:
-            all_entries += json.load(properties_file)
-    valid_date_and_prices = list(
-        filter(
-            lambda e: e["price"] > 0,
-            map(lambda e: {"date": e["date"], "price": e["price"]}, all_entries),
-        )
-    )
-    sorted_date_and_prices = sorted(
-        valid_date_and_prices, key=lambda e: datetime.strptime(e["date"], "%d.%m.%Y")
-    )
-    with open(f"{out_dir}/{price_overview_endpoint_name}", "w") as file:
-        file.write(json.dumps(sorted_date_and_prices, indent=4))
-
-
 if __name__ == "__main__":
     print("Start generating the files for pages")
 
@@ -156,6 +134,5 @@ if __name__ == "__main__":
     generate_index_endpoint(car_endpoints)
     for car_endpoint in car_endpoints:
         generate_car_endpoint(car_endpoint)
-    generate_price_overview_endpoint(car_endpoints)
 
     print("Finish generating the files")
